@@ -1,4 +1,4 @@
-from selenium.common import TimeoutException, NoSuchElementException
+from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -12,7 +12,7 @@ NEXT_BUTTON1 = (By.CSS_SELECTOR, "[data-autotest-button-button-next]")
 NEXT_BUTTON2 = (By.CSS_SELECTOR, "[data-autotest-button-submit-next]")
 
 
-def test_landing_page(browser, base_url, zip_code, thank_you_url):
+def test_creating_order(browser, base_url, zip_code, thank_you_url):
     page = LandingPage(browser, base_url)
     page.open_page()
     page.should_be_landing_page()
