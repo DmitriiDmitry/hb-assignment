@@ -10,6 +10,10 @@ load_dotenv()
 def base_url():
     return os.getenv("BASE_URL")
 
+@pytest.fixture(scope="session")
+def thank_you_url():
+    return os.getenv("THANK_YOU_URL")
+
 
 @pytest.fixture(scope="session")
 def zip_code():
