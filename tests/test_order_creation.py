@@ -119,8 +119,8 @@ def test_creating_order(browser, base_url, zip_code, thank_you_url):
 
     text = thank_you_title.text.strip()
 
-    assert browser.current_url == thank_you_url
-    assert thank_you_title.is_displayed()
-    assert text != ""
-    assert text.lower().startswith("thank you")
+    assert browser.current_url == thank_you_url, "thank-you url does not match"
+    assert thank_you_title.is_displayed(), "thank-you title does not match"
+    assert text != "", "thank-you text is empty"
+    assert text.lower().startswith("thank you"), "title does not start with 'thank you'"
 
