@@ -1,3 +1,4 @@
+import pytest
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -11,7 +12,7 @@ from utils.utils import generate_random_name, generate_random_email, generate_us
 NEXT_BUTTON1 = (By.CSS_SELECTOR, "[data-autotest-button-button-next]")
 NEXT_BUTTON2 = (By.CSS_SELECTOR, "[data-autotest-button-submit-next]")
 
-
+@pytest.mark.smoke
 def test_creating_order(browser, base_url, zip_code, thank_you_url):
     page = LandingPage(browser, base_url)
     page.open_page()
