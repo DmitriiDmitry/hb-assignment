@@ -133,7 +133,7 @@ def test_creating_order(browser, base_url, zip_code, thank_you_url):
                 (By.CSS_SELECTOR, "[data-autotest-button-submit-phone-number-is-correct]")
             )
         ).click()
-    except NoSuchElementException:
+    except TimeoutException:
         pass
 
     WebDriverWait(browser, 15).until(EC.url_to_be(thank_you_url))
