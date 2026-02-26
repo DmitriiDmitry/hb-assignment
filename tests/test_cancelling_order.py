@@ -7,6 +7,7 @@ from pages.landing_page import LandingPage
 
 NEXT_BUTTON = (By.CSS_SELECTOR, "[data-autotest-button-button-next]")
 
+
 @pytest.mark.regression
 def test_creating_order(browser, base_url, zip_code):
     page = LandingPage(browser, base_url)
@@ -17,7 +18,9 @@ def test_creating_order(browser, base_url, zip_code):
 
     # TODO: make multi-form wizard Page Object
     countertops_option = WebDriverWait(browser, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, "input[data-autotest-checkbox-updates-countertop] + label"))
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, "input[data-autotest-checkbox-updates-countertop] + label")
+        )
     )
     browser.execute_script("arguments[0].scrollIntoView({block: 'center'});", countertops_option)
     countertops_option.click()
@@ -25,7 +28,8 @@ def test_creating_order(browser, base_url, zip_code):
     WebDriverWait(browser, 10).until(EC.element_to_be_clickable(NEXT_BUTTON)).click()
 
     WebDriverWait(browser, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, '[data-autotest-button-button-no]'))).click()
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "[data-autotest-button-button-no]"))
+    ).click()
 
     WebDriverWait(browser, 15).until(EC.url_to_be(base_url))
 
@@ -37,5 +41,3 @@ def test_creating_order(browser, base_url, zip_code):
     landing_page.should_be_landing_page()
 
     assert browser.current_url == base_url, "base url does not match"
-
-

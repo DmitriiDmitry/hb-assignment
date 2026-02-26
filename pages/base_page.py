@@ -20,7 +20,9 @@ class BasePage:
 
     def is_not_element_present(self, method, locator, timeout=4):
         try:
-            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((method, locator)))
+            WebDriverWait(self.browser, timeout).until(
+                EC.presence_of_element_located((method, locator))
+            )
         except TimeoutException:
             return True
 

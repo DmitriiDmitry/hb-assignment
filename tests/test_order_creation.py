@@ -1,16 +1,17 @@
+import random
+
 import pytest
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-import random
 
-from conftest import thank_you_url
 from pages.landing_page import LandingPage
-from utils.utils import generate_random_name, generate_random_email, generate_us_phone
+from utils.utils import generate_random_email, generate_random_name, generate_us_phone
 
 NEXT_BUTTON1 = (By.CSS_SELECTOR, "[data-autotest-button-button-next]")
 NEXT_BUTTON2 = (By.CSS_SELECTOR, "[data-autotest-button-submit-next]")
+
 
 @pytest.mark.smoke
 def test_creating_order(browser, base_url, zip_code, thank_you_url):
@@ -22,23 +23,33 @@ def test_creating_order(browser, base_url, zip_code, thank_you_url):
 
     # TODO: make multi-form wizard Page Object
     kitchen_cabinets_option = WebDriverWait(browser, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, "input[data-autotest-checkbox-updates-cabinets] + label"))
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, "input[data-autotest-checkbox-updates-cabinets] + label")
+        )
     )
-    browser.execute_script("arguments[0].scrollIntoView({block: 'center'});", kitchen_cabinets_option)
+    browser.execute_script(
+        "arguments[0].scrollIntoView({block: 'center'});", kitchen_cabinets_option
+    )
     kitchen_cabinets_option.click()
 
     WebDriverWait(browser, 10).until(EC.element_to_be_clickable(NEXT_BUTTON1)).click()
 
     replace_all_cabinets_option = WebDriverWait(browser, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, "input[data-autotest-radio-worktype-replaceall] + label"))
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, "input[data-autotest-radio-worktype-replaceall] + label")
+        )
     )
-    browser.execute_script("arguments[0].scrollIntoView({block: 'center'});", replace_all_cabinets_option)
+    browser.execute_script(
+        "arguments[0].scrollIntoView({block: 'center'});", replace_all_cabinets_option
+    )
     replace_all_cabinets_option.click()
 
     WebDriverWait(browser, 10).until(EC.element_to_be_clickable(NEXT_BUTTON2)).click()
 
     single_family_option = WebDriverWait(browser, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, "input[data-autotest-radio-propertytype-single] + label"))
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, "input[data-autotest-radio-propertytype-single] + label")
+        )
     )
     browser.execute_script("arguments[0].scrollIntoView({block: 'center'});", single_family_option)
     single_family_option.click()
@@ -46,7 +57,9 @@ def test_creating_order(browser, base_url, zip_code, thank_you_url):
     WebDriverWait(browser, 10).until(EC.element_to_be_clickable(NEXT_BUTTON2)).click()
 
     mobile_home_no_option = WebDriverWait(browser, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, "input[data-autotest-radio-internalmobilehome-no] + label"))
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, "input[data-autotest-radio-internalmobilehome-no] + label")
+        )
     )
     browser.execute_script("arguments[0].scrollIntoView({block: 'center'});", mobile_home_no_option)
     mobile_home_no_option.click()
@@ -54,7 +67,9 @@ def test_creating_order(browser, base_url, zip_code, thank_you_url):
     WebDriverWait(browser, 10).until(EC.element_to_be_clickable(NEXT_BUTTON2)).click()
 
     owner_yes_option = WebDriverWait(browser, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, "input[data-autotest-radio-owner-yes] + label"))
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, "input[data-autotest-radio-owner-yes] + label")
+        )
     )
     browser.execute_script("arguments[0].scrollIntoView({block: 'center'});", owner_yes_option)
     owner_yes_option.click()
@@ -62,7 +77,9 @@ def test_creating_order(browser, base_url, zip_code, thank_you_url):
     WebDriverWait(browser, 10).until(EC.element_to_be_clickable(NEXT_BUTTON1)).click()
 
     kitchen_size_field = WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "input[data-autotest-input-squarefeet-tel]"))
+        EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "input[data-autotest-input-squarefeet-tel]")
+        )
     )
     random_size = random.randint(10, 30)
     kitchen_size_field.clear()
@@ -71,7 +88,9 @@ def test_creating_order(browser, base_url, zip_code, thank_you_url):
     WebDriverWait(browser, 10).until(EC.element_to_be_clickable(NEXT_BUTTON2)).click()
 
     second_budget_option = WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "input[data-autotest-radio-budget-2] + label"))
+        EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "input[data-autotest-radio-budget-2] + label")
+        )
     )
     browser.execute_script("arguments[0].scrollIntoView({block: 'center'});", second_budget_option)
     second_budget_option.click()
@@ -79,7 +98,9 @@ def test_creating_order(browser, base_url, zip_code, thank_you_url):
     WebDriverWait(browser, 10).until(EC.element_to_be_clickable(NEXT_BUTTON2)).click()
 
     full_name_field = WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "input[data-autotest-input-fullname-text]"))
+        EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "input[data-autotest-input-fullname-text]")
+        )
     )
     full_name_field.clear()
     full_name_field.send_keys(generate_random_name())
@@ -93,17 +114,25 @@ def test_creating_order(browser, base_url, zip_code, thank_you_url):
     WebDriverWait(browser, 10).until(EC.element_to_be_clickable(NEXT_BUTTON2)).click()
 
     phone_number_field = WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "input[data-autotest-input-phonenumber-tel]"))
+        EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "input[data-autotest-input-phonenumber-tel]")
+        )
     )
     phone_number_field.clear()
     phone_number_field.send_keys(generate_us_phone())
 
     WebDriverWait(browser, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, "[data-autotest-button-submit-submit-my-request]"))).click()
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, "[data-autotest-button-submit-submit-my-request]")
+        )
+    ).click()
 
     try:
         WebDriverWait(browser, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, "[data-autotest-button-submit-phone-number-is-correct]"))).click()
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, "[data-autotest-button-submit-phone-number-is-correct]")
+            )
+        ).click()
     except NoSuchElementException:
         pass
 
@@ -123,4 +152,3 @@ def test_creating_order(browser, base_url, zip_code, thank_you_url):
     assert thank_you_title.is_displayed(), "thank-you title does not match"
     assert text != "", "thank-you text is empty"
     assert text.lower().startswith("thank you"), "title does not start with 'thank you'"
-
