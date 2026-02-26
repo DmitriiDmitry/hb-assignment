@@ -9,7 +9,7 @@ NEXT_BUTTON = (By.CSS_SELECTOR, "[data-autotest-button-button-next]")
 
 
 @pytest.mark.regression
-def test_creating_order(browser, base_url, zip_code):
+def test_cancelling_order(browser, base_url, zip_code):
     page = LandingPage(browser, base_url)
     page.open_page()
     page.should_be_landing_page()
